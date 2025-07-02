@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة الطول والوزن</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .container {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 8px;
+            width: 100%;
+        }
+        #result {
+            font-weight: bold;
+            margin-top: 15px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>حاسبة الطول والوزن</h2>
+        
+        <label for="tall">الطول (سم):</label>
+        <input type="number" id="tall" placeholder="أدخل الطول بالسنتيمتر">
+        
+        <label for="weight">الوزن (كجم):</label>
+        <input type="number" id="weight" placeholder="أدخل الوزن بالكيلوجرام">
+        
+        <button onclick="calculate()">احسب النسبة</button>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculate() {
+            // الحصول على القيم من حقلي الإدخال
+            var tall = document.getElementById("tall").value;
+            var weight = document.getElementById("weight").value;
+            
+            // التحقق من أن القيم ليست فارغة
+            if(tall === "" || weight === "") {
+                document.getElementById("result").innerText = "الرجاء إدخال الطول والوزن";
+                return;
+            }
+            
+            // تحويل القيم إلى أرقام
+            tall = parseFloat(tall);
+            weight = parseFloat(weight);
+            
+            // التحقق من أن القيم صحيحة
+            if(tall <= 0 || weight <= 0) {
+                document.getElementById("result").innerText = "القيم يجب أن تكون أكبر من الصفر";
+                return;
+            }
+            
+            // حساب النتيجة
+            var total = tall / weight;
+            
+            // عرض النتيجة
+            document.getElementById("result").innerText = "النسبة: " + total.toFixed(2);
+        }
+    </script>
+</body>
+</html>

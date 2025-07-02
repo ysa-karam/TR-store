@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YSASTORE | متجر اكسسوارات الموبايل</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f7f7f7;
+    }
+    header {
+      background-color: #222;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+    }
+    nav {
+      background-color: #444;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+    .container {
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .product {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      width: 200px;
+      text-align: center;
+      padding: 15px;
+    }
+    .product img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+    .product button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #cart {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: white;
+      border: 2px solid #28a745;
+      padding: 10px;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+    footer {
+      background-color: #222;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>YSASTORE</h1>
+    <p>أفضل اكسسوارات الهواتف بأسعار مميزة</p>
+  </header>
+
+  <nav>
+    <a href="index.html">الرئيسية</a>
+    <a href="products.html">المنتجات</a>
+    <a href="about.html">عنا</a>
+    <a href="contact.html">تواصل معنا</a>
+  </nav>
+
+  <div id="cart">🛒 السلة: <span id="cart-count">0</span></div>
+
+  <div class="container">
+    <!-- منتجات متعددة -->
+    <div class="product">
+      <img src="https://source.unsplash.com/200x200/?phone-case" alt="غطاء هاتف">
+      <h3>غطاء هاتف شفاف</h3>
+      <p>150 جنيه</p>
+      <button onclick="addToCart()">اشتري الآن</button>
+    </div>
+    <div class="product">
+      <img src="https://source.unsplash.com/200x200/?charger" alt="شاحن سريع">
+      <h3>شاحن سريع</h3>
+      <p>120 جنيه</p>
+      <button onclick="addToCart()">اشتري الآن</button>
+    </div>
+    <div class="product">
+      <img src="https://source.unsplash.com/200x200/?earphones" alt="سماعة بلوتوث">
+      <h3>سماعة بلوتوث</h3>
+      <p>299 جنيه</p>
+      <button onclick="addToCart()">اشتري الآن</button>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 YSASTORE - جميع الحقوق محفوظة
+  </footer>
+
+  <script>
+    let count = 0;
+    function addToCart() {
+      count++;
+      document.getElementById("cart-count").textContent = count;
+    }
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YSASTORE | متجر اكسسوارات الموبايل</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f7f7f7;
+    }
+    header {
+      background-color: #222;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+    }
+    nav {
+      background-color: #444;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+    .container {
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .product {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      width: 200px;
+      text-align: center;
+      padding: 15px;
+    }
+    .product img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+    .product button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    footer {
+      background-color: #222;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>YSASTORE</h1>
+    <p>أفضل اكسسوارات الهواتف بأسعار مميزة</p>
+  </header>
+
+  <nav>
+    <a href="index.html">الرئيسية</a>
+    <a href="products.html">المنتجات</a>
+    <a href="about.html">عنا</a>
+    <a href="contact.html">تواصل معنا</a>
+  </nav>
+
+  <div class="container">
+    <!-- مثال منتج واحد مع زر الشراء -->
+    <div class="product">
+      <img src="https://source.unsplash.com/200x200/?phone-case" alt="غطاء هاتف">
+      <h3>غطاء هاتف شفاف</h3>
+      <p>150 جنيه</p>
+      <button>اشتري الآن</button>
+    </div>
+    <!-- باقي المنتجات تظل كما هي، ويمكن تكرار زر الشراء داخل كل .product -->
+    <!-- لإضافة صفحات: أنشئ ملفات HTML جديدة مثل about.html و contact.html و products.html بنفس تنسيق الصفحة الرئيسية، مع محتوى خاص بكل صفحة -->
+  </div>
+
+  <footer>
+    &copy; 2025 YSASTORE - جميع الحقوق محفوظة
+  </footer>
+</body>
+</html>

@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="html-page">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر الهواتف الذكية</title>
+    <style>
+        /* CSS عام */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        /* الشريط العلوي */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin-top: 0;
+        }
+        
+        nav ul li {
+            margin: 0 1rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem;
+        }
+        
+        nav ul li a:hover {
+            background-color: #34495e;
+            border-radius: 4px;
+        }
+        
+        .language-switcher {
+            color: white;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .language-switcher:hover {
+            background-color: #34495e;
+        }
+        
+        /* قسم البحث */
+        .search-container {
+            padding: 1rem;
+            background-color: #ecf0f1;
+            text-align: center;
+        }
+        
+        .search-container input {
+            padding: 0.5rem;
+            width: 70%;
+            max-width: 500px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        /* المنتجات */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            padding: 1.5rem;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 10px;
+        }
+        
+        .product-info {
+            padding: 1rem;
+        }
+        
+        .product-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-price {
+            color: #e74c3c;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .add-to-cart {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .add-to-cart:hover {
+            background-color: #2980b9;
+        }
+        
+        /* سلة التسوق */
+        .cart-icon {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background-color: #e74c3c;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #2c3e50;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* التذييل */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        /* صفحة حول المتجر */
+        .about-page {
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .about-page h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+        }
+        
+        .about-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            line-height: 1.6;
+        }
+        
+        /* صفحة الاتصال بنا */
+        .contact-page {
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .contact-page h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+        }
+        
+        .contact-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .contact-form {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .contact-form button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .contact-form button:hover {
+            background-color: #2980b9;
+        }
+        
+        /* صفحة تسجيل الدخول */
+        .login-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+            padding: 2rem;
+        }
+        
+        .login-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .login-container h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+        
+        .login-form {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .login-form input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .login-form button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        
+        .login-form button:hover {
+            background-color: #2980b9;
+        }
+        
+        .login-links {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .login-links a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        /* الصفحات المخفية */
+        .page {
+            display: none;
+        }
+        
+        .active-page {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- الشريط العلوي -->
+    <header>
+        <div class="logo">متجر الهواتف</div>
+        <div class="header-content">
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-link" data-page="home">الرئيسية</a></li>
+                    <li><a href="#" class="nav-link" data-page="products">الهواتف</a></li>
+                    <li><a href="#" class="nav-link" data-page="accessories">الإكسسوارات</a></li>
+                    <li><a href="#" class="nav-link" data-page="about">عنا</a></li>
+                    <li><a href="#" class="nav-link" data-page="contact">اتصل بنا</a></li>
+                    <li><a href="#" class="nav-link" data-page="login">تسجيل الدخول</a></li>
+                </ul>
+            </nav>
+            <div class="language-switcher" id="language-switcher">English</div>
+        </div>
+    </header>
+    
+    <!-- الصفحة الرئيسية -->
+    <main id="home" class="page active-page">
+        <!-- قسم البحث -->
+        <section class="search-container">
+            <input type="text" placeholder="ابحث عن هاتف..." id="search-input">
+        </section>
+        
+        <!-- قسم المنتجات -->
+        <div class="products" id="products-container">
+            <!-- سيتم إضافة المنتجات عبر الجافاسكريبت -->
+        </div>
+    </main>
+    
+    <!-- صفحة الهواتف -->
+    <div id="products" class="page">
+        <section class="search-container">
+            <input type="text" placeholder="ابحث عن هاتف..." class="products-search">
+        </section>
+        <div class="products" id="all-products">
+            <!-- سيتم إضافة المنتجات عبر الجافاسكريبت -->
+        </div>
+    </div>
+    
+    <!-- صفحة الإكسسوارات -->
+    <div id="accessories" class="page">
+        <h1 style="text-align: center; padding: 2rem;">الإكسسوارات</h1>
+        <div class="products">
+            <!-- إكسسوار 1 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.samsung.com/is/image/samsung/p6pim/ar/ee-ig935tbvgww/gallery/ar-galaxy-buds2-pro-r510-sm-r510nzaamea-thumb-533370790" alt="سماعات سامسونج">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">سماعات سامسونج بودز 2</h3>
+                    <div class="product-price">699 ريال</div>
+                    <button class="add-to-cart">أضف إلى السلة</button>
+                </div>
+            </div>
+            
+            <!-- إكسسوار 2 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://www.apple.com/v/airpods-3rd-generation/a/images/overview/design/design_top_view__gnfk9t3j0zmq_large.png" alt="سماعات آبل">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">سماعات آبل ايربودز</h3>
+                    <div class="product-price">899 ريال</div>
+                    <button class="add-to-cart">أضف إلى السلة</button>
+                </div>
+            </div>
+            
+            <!-- إكسسوار 3 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://m.media-amazon.com/images/I/61GI+RPXGaL._AC_UF1000,1000_QL80_.jpg" alt="حافظة هواتف">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">حافظة هواتف جلدية</h3>
+                    <div class="product-price">129 ريال</div>
+                    <button class="add-to-cart">أضف إلى السلة</button>
+                </div>
+            </div>
+            
+            <!-- إكسسوار 4 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://cdn.shopify.com/s/files/1/0057/8938/4802/products/main-img_1f9b5e1e-1c9d-4b8a-8b3e-8d1f1a3d9b9a.png" alt="شاحن متنقل">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">شاحن متنقل 10000mAh</h3>
+                    <div class="product-price">199 ريال</div>
+                    <button class="add-to-cart">أضف إلى السلة</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- صفحة حول المتجر -->
+    <div id="about" class="page">
+        <div class="about-page">
+            <h1>حول متجر الهواتف</h1>
+            <div class="about-content">
+                <p>مرحبًا بكم في متجر الهواتف الذكية، وجهتكم الأولى لشراء أحدث الهواتف والإكسسوارات بأسعار تنافسية.</p>
+                <br>
+                <p>تأسس متجرنا في عام 2020 بهدف توفير أحدث الأجهزة الإلكترونية بجودة عالية وضمان مميز. نحن نعمل مباشرة مع الشركات المصنعة لتقديم أفضل المنتجات لعملائنا.</p>
+                <br>
+                <h3>رؤيتنا</h3>
+                <p>أن نكون المتجر الرائد في بيع الهواتف الذكية في المنطقة، مع التركيز على رضا العملاء والجودة العالية.</p>
+                <br>
+                <h3>رسالتنا</h3>
+                <p>توفير أحدث التقنيات بأسعار تنافسية، مع خدمة عملاء مميزة وضمان حقيقي على جميع المنتجات.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- صفحة اتصل بنا -->
+    <div id="contact" class="page">
+        <div class="contact-page">
+            <h1>اتصل بنا</h1>
+            <div class="contact-content">
+                <div class="contact-info" style="margin-bottom: 2rem;">
+                    <p><strong>العنوان:</strong> الرياض، المملكة العربية السعودية</p>
+                    <p><strong>الهاتف:</strong> +966 12 345 6789</p>
+                    <p><strong>البريد الإلكتروني:</strong> info@phone-store.com</p>
+                    <p><strong>ساعات العمل:</strong> من الأحد إلى الخميس، 9 صباحًا إلى 6 مساءً</p>
+                </div>
+                
+                <h3>أرسل لنا رسالة</h3>
+                <form class="contact-form">
+                    <input type="text" placeholder="الاسم الكامل" required>
+                    <input type="email" placeholder="البريد الإلكتروني" required>
+                    <input type="tel" placeholder="رقم الهاتف">
+                    <textarea rows="5" placeholder="رسالتك" required></textarea>
+                    <button type="submit">إرسال</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- صفحة تسجيل الدخول -->
+    <div id="login" class="page">
+        <div class="login-page">
+            <div class="login-container">
+                <h1>تسجيل الدخول</h1>
+                <form class="login-form">
+                    <input type="email" placeholder="البريد الإلكتروني" required>
+                    <input type="password" placeholder="كلمة المرور" required>
+                    <button type="submit">تسجيل الدخول</button>
+                </form>
+                <div class="login-links">
+                    <a href="#">نسيت كلمة المرور؟</a>
+                    <br>
+                    <a href="#">إنشاء حساب جديد</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- سلة التسوق -->
+    <div class="cart-icon">
+        <span>🛒</span>
+        <span class="cart-count">0</span>
+    </div>
+    
+    <!-- التذييل -->
+    <footer>
+        <p>© 2023 متجر الهواتف الذكية. جميع الحقوق محفوظة.</p>
+        <p>تواصل معنا: info@phone-store.com</p>
+    </footer>
+    
+    <script>
+        // بيانات المنتجات
+        const products = [
+            {
+                id: 1,
+                name: "سامسونج جالكسي S22",
+                price: "3,199",
+                image: "https://images.samsung.com/is/image/samsung/p6pim/ar/2202/gallery/ar-galaxy-s22-s901-412360-sm-s901ezkgmea-thumb-530606516"
+            },
+            {
+                id: 2,
+                name: "آيفون 15 برو",
+                price: "5,499",
+                image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-1inch?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1693009278906"
+            },
+            {
+                id: 3,
+                name: "شاومي 13 برو",
+                price: "3,299",
+                image: "https://i0.wp.com/www.gizmochina.com/wp-content/uploads/2023/03/Xiaomi-13-Pro-1.jpg"
+            },
+            {
+                id: 4,
+                name: "أوبو A78",
+                price: "1,199",
+                image: "https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/a78-5g-middle-east/navigation/A78-5G-navigation-blue-v2.png"
+            },
+            {
+                id: 5,
+                name: "هواوي نوفا 11i",
+                price: "1,299",
+                image: "https://consumer.huawei.com/content/dam/huawei-cbg-site/common/mkt/pdp/phones/nova-11i/img/huawei-nova-11i-kv-black.png"
+            },
+            {
+                id: 6,
+                name: "ون بلس 11",
+                price: "3,599",
+                image: "https://www.oneplus.com/content/dam/oasis/page/common/global-header/oneplus-11-5g.png"
+            },
+            {
+                id: 7,
+                name: "ريلمي نارزو 50 برو",
+                price: "1,499",
+                image: "https://www.realme.com/content/dam/realme-pk/narzo/narzo-50-pro-5g/images/phone.png"
+            },
+            {
+                id: 8,
+                name: "نوكيا G22",
+                price: "899",
+                image: "https://www.nokia.com/phones/sites/default/files/styles/scale_768/public/2023-03/Nokia-G22-hero-image.png"
+            }
+        ];
+
+        // بيانات اللغة
+        const translations = {
+            en: {
+                home: "Home",
+                products: "Phones",
+                accessories: "Accessories",
+                about: "About Us",
+                contact: "Contact Us",
+                login: "Login",
+                searchPlaceholder: "Search for a phone...",
+                addToCart: "Add to Cart",
+                aboutTitle: "About Phone Store",
+                contactTitle: "Contact Us",
+                loginTitle: "Login",
+                language: "العربية"
+            },
+            ar: {
+                home: "الرئيسية",
+                products: "الهواتف",
+                accessories: "الإكسسوارات",
+                about: "عنا",
+                contact: "اتصل بنا",
+                login: "تسجيل الدخول",
+                searchPlaceholder: "ابحث عن هاتف...",
+                addToCart: "أضف إلى السلة",
+                aboutTitle: "حول متجر الهواتف",
+                contactTitle: "اتصل بنا",
+                loginTitle: "تسجيل الدخول",
+                language: "English"
+            }
+        };
+
+        // تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProducts();
+            setupEventListeners();
+        });
+
+        // عرض المنتجات
+        function renderProducts() {
+            const productsContainer = document.getElementById('products-container');
+            const allProductsContainer = document.getElementById('all-products');
+            
+            products.forEach(product => {
+                const productHTML = `
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="${product.image}" alt="${product.name}">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">${product.name}</h3>
+                            <div class="product-price">${product.price} ريال</div>
+                            <button class="add-to-cart">أضف إلى السلة</button>
+                        </div>
+                    </div>
+                `;
+                
+                if (productsContainer) productsContainer.innerHTML += productHTML;
+                if (allProductsContainer) allProductsContainer.innerHTML += productHTML;
+            });
+        }
+
+        // إعداد مستمعي الأحداث
+        function setupEventListeners() {
+            // التنقل بين الصفحات
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    showPage(pageId);
+                });
+            });
+
+            // تبديل اللغة
+            const languageSwitcher = document.getElementById('language-switcher');
+            if (languageSwitcher) {
+                languageSwitcher.addEventListener('click', toggleLanguage);
+            }
+
+            // إضافة إلى السلة
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            const cartCount = document.querySelector('.cart-count');
+            let count = 0;
+            
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    count++;
+                    cartCount.textContent = count;
+                    
+                    const productCard = this.closest('.product-card');
+                    productCard.style.transform = 'scale(1.05)';
+                    setTimeout(() => {
+                        productCard.style.transform = '';
+                    }, 300);
+                });
+            });
+
+            // فتح السلة
+            const cartIcon = document.querySelector('.cart-icon');
+            cartIcon.addEventListener('click', function() {
+                alert(`لديك ${count} منتج في السلة`);
+            });
+
+            // البحث
+            const searchInputs = document.querySelectorAll('input[type="text"]');
+            searchInputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    const productCards = document.querySelectorAll('.product-card');
+                    
+                    productCards.forEach(card => {
+                        const title = card.querySelector('.product-title').textContent.toLowerCase();
+                        if (title.includes(searchTerm)) {
+                            card.style.display = '';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        }
+
+        // عرض الصفحة المحددة
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active-page');
+            });
+            
+            const activePage = document.getElementById(pageId);
+            if (activePage) {
+                activePage.classList.add('active-page');
+            }
+        }
+
+        // تبديل اللغة
+        function toggleLanguage() {
+            const html = document.getElementById('html-page');
+            const currentLang = html.getAttribute('lang');
+            const newLang = currentLang === 'ar' ? 'en' : 'ar';
+            
+            // تغيير اتجاه الصفحة
+            html.setAttribute('lang', newLang);
+            html.setAttribute('dir', newLang === 'ar' ? 'rtl' : 'ltr');
+            
+            // تحديث نص العناصر
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                element.textContent = translations[newLang][key];
+            });
+            
+            // تحديث نص مبدل اللغة
+            document.getElementById('language-switcher').textContent = translations[newLang].language;
+            
+            // تحديث العناصر الأخرى
+            document.querySelectorAll('.add-to-cart').forEach(btn => {
+                btn.textContent = translations[newLang].addToCart;
+            });
+            
+            document.querySelectorAll('input[type="text"]').forEach(input => {
+                input.placeholder = translations[newLang].searchPlaceholder;
+            });
+            
+            // تحديث عناوين الصفحات
+            if (document.getElementById('about')) {
+                document.querySelector('#about h1').textContent = translations[newLang].aboutTitle;
+            }
+            
+            if (document.getElementById('contact')) {
+                document.querySelector('#contact h1').textContent = translations[newLang].contactTitle;
+            }
+            
+            if (document.getElementById('login')) {
+                document.querySelector('#login h1').textContent = translations[newLang].loginTitle;
+            }
+        }
+    </script>
+</body>
+</html>
